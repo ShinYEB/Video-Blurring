@@ -1,0 +1,289 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 전체 컨테이너 */
+.container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 헤더 스타일 */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+.nav-item:hover {
+  color: orange;
+}
+
+/* 메인 섹션 */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1e9df;
+  color: white;
+  padding: 50px;
+  height: 400px;
+}
+
+.hero-content {
+  max-width: 50%;
+}
+
+.hero-content h2 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.cta-button {
+  background-color: #a89a8e;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cta-button:hover {
+  background-color: #a47864;
+}
+
+/* 이미지 섹션 */
+.hero-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  height: 300px;
+  width: 50%;
+}
+
+.app-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Video Library 섹션 */
+.video-library {
+  padding: 20px;
+  text-align: left;
+}
+
+.video-library h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.video-grid {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+}
+
+.video-item {
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  height: 200px;
+}
+
+.video-item img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.video-item p {
+  margin: 75px 0 5px;
+  font-size: 16px;
+}
+
+.free-tag {
+  color: orange;
+  font-weight: bold;
+}
+
+/* Footer 섹션 */
+.footer {
+  margin-top: 500px;
+  border-top: 1px solid #ddd;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.footer-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-info p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-navigation h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.footer-navigation ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-navigation li {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.footer-navigation li:hover {
+  text-decoration: underline;
+}
+
+/* Video Name Section */
+.video-name {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 라벨과 입력 필드 간 간격 */
+}
+
+.video-name-label {
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap; /* 라벨이 한 줄에 유지되도록 */
+}
+
+.video-name-input {
+  font-size: 16px;
+  padding: 5px 10px;
+  border: none; /* 테두리 제거 */
+  outline: none; /* 포커스 시 표시되는 외곽선 제거 */
+  background-color: #f5f5f5; /* 입력 필드 배경색 */
+  border-radius: 4px; /* 약간의 둥근 모서리 */
+  flex: 1; /* 입력 필드가 가능한 넓게 차지 */
+}
+
+.upload-preview,
+.edit-options {
+  margin-bottom: 20px;
+}
+
+.preview-buttons,
+.edit-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.preview-btn,
+.option-btn {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-btn:hover,
+.option-btn:hover {
+  background-color: #e0e0e0;
+}
+
+.edit-button {
+  width: 90%;
+  padding: 12px;
+  margin-left:15px;
+  margin-top: 70px;
+  background-color: #a89a8e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #a47864;
+}
