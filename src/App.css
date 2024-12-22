@@ -147,17 +147,18 @@
 
 .video-grid {
   display: flex;
+  flex-wrap: wrap;
   justify-content: left;
-  gap: 20px;
+  gap: 54px;
 }
 
 .video-item {
   text-align: center;
-  border: 1px solid #ddd;
+
   border-radius: 8px;
   padding: 10px;
-  width: 200px;
-  height: 200px;
+  width: 555px;
+  height: 230px;
 }
 
 .video-item img {
@@ -168,6 +169,19 @@
 .video-item p {
   margin: 75px 0 5px;
   font-size: 16px;
+}
+
+.thumbnail {
+  height: 210px;
+  width: 280px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .free-tag {
@@ -241,6 +255,16 @@
   flex: 1; /* 입력 필드가 가능한 넓게 차지 */
 }
 
+.video-button {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 3%;
+}
+
+.video-button:hover {
+  background-color: #fafafa;
+}
+
 .upload-preview,
 .edit-options {
   margin-bottom: 20px;
@@ -275,7 +299,7 @@
   width: 90%;
   padding: 12px;
   margin-left:15px;
-  margin-top: 70px;
+  margin-top: 280px;
   background-color: #a89a8e;
   color: white;
   border: none;
@@ -286,4 +310,31 @@
 
 .edit-button:hover {
   background-color: #a47864;
+}
+
+.video-preview {
+  margin-top: 30px;
+  width: 720px;
+  height: 480px;
+}
+
+video {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 720px;
+  height: 480px;
+}
+
+.pw-edit-button {
+  background-color: white;
+  height: 30px;
+  border: none;
+  color: gray;
+  padding: 0px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-left: 20px;
 }

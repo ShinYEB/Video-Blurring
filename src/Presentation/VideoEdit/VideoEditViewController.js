@@ -1,41 +1,143 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import Modal from "react-modal/lib/components/Modal";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import ModuleStyle from "../../ModuleStyle.module.css"
 
 function VideoEditViewController() {
 
+    const uploadModalstyle = {
+        overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0, 
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex:15
+        },
+        content: {
+            position: 'absolute',
+            width: '1000px',
+            height: '860px',
+            margin: 'auto',
+            border: '1px solid #ccc',
+            background: '#fff',
+            borderRadius: '1%',
+            outline: 'none',
+            padding: '2%',
+            zIndex:20,
+        }
+    }
+
+    const [videoFile, setVideoFile] = useState(null);
+    const [isUploadModalOpen, setUploadModal] = useState(false)
+
+    const location = useLocation();
+    const { video_title, video_path } = location.state || {}; // 전달된 값 받기
+
+    useState(() => {
+
+    }, [])
+
     return <div className={ModuleStyle.contentPageStyle}>
-        Videos
-        <div style={{display:"flex"}}>
-            <div className={ModuleStyle.videoCellStyle}>Video 1 Select Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Video 2 Select Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Video 3 Select Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Video 4 Select Button</div>
-            <button className={ModuleStyle.videoPlusButton}> Video Add Button </button>
+        <header className="header">
+        <h1 className="logo">Video Blurring Website</h1>
+        <nav className="nav">
+            <a href="/" className="nav-item">Main Page</a>
+            <a href="/mypage" className="nav-item">My Page</a>
+            </nav>
+       </header>
+
+       <h2 style={{marginTop:"100px", marginLeft:"270px"}}>{video_title}</h2>
+       <div className="video-preview" style={{margin:"auto"}}>
+            <video src={video_path} controls width="400" />
+        </div>
+        <button className="cta-button" style={{marginLeft:"560px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>
+    
+        <h2 style={{marginTop:"100px", marginLeft:"270px"}}>Video Download</h2>
+        
+        <div style={{marginLeft:"270px", display:"flex"}}>
+            <div className="thumbnail">thumbnail #클릭 시 비디오 다운로드</div>
+            <div className="thumbnail" style={{marginLeft:"30px"}}>thumbnail #클릭 시 비디오 다운로드</div>
         </div>
 
-        Video
-        <div style={{display:"flex"}}>
-            <div className={ModuleStyle.video}> Upload Button & Video Preview </div>
-            <div className={ModuleStyle.editOptionContainer}> Edit Options 
-                <div className={ModuleStyle.editOption}>Option1</div>
-                <div className={ModuleStyle.editOption}>Option2</div>
-                <div className={ModuleStyle.editOption}>Option3</div>
-                <div className={ModuleStyle.editOption}>...</div>
-                
-                <button className={ModuleStyle.editButton}>Edit Button</button>
+
+        <footer className="footer">
+            <div className="footer-content">
+                <div className="footer-info">
+                    <h2>Video Blurring Website</h2>
+                    <p>
+                    Edit videos, apply blur effects, and manage your account seamlessly.
+                    </p>
+                </div>
+                <div className="footer-navigation">
+                    <h3>Navigation</h3>
+                    <ul>
+                    <li>Main Page</li>
+                    <li>My Page</li>
+                    <li>Video Editing</li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </footer>
 
-        download
-        <div style={{display:"flex", marginTop:"30px"}}>
-            <div className={ModuleStyle.videoCellStyle}>Edited Video 1 Option1 download Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Edited Video 1 Option2 download Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Edited Video 1 Option3 download Button</div>
-            <div className={ModuleStyle.videoCellStyle}>Edited Video 1 Option4 download Button</div>
-        </div>
+
+        {(isUploadModalOpen) && <Modal style={uploadModalstyle} isOpen={isUploadModalOpen}>
+            <div style={{display:"flex"}}>
+                <h1 style={{marginTop:"-10px"}}>Video Upload</h1>
+                <button className={ModuleStyle.cancelButton} onClick={() => {setUploadModal(false); setVideoFile(false);}}>X</button>                
+            </div>
+            
+            <div className="video-name">
+                <label htmlFor="video-name-input" className="video-name-label">Video Name:</label>
+                {video_title}
+            </div>
+            
+            <h3>Blur Select</h3>
+            <div style={{display:"flex"}}>
+                <div>
+                    <button className={ModuleStyle.imageCellStyle}>Person1 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
+                </div>
+                <div>
+                    <button className={ModuleStyle.imageCellStyle}>Person2 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
+                </div>
+                <div>
+                    <button className={ModuleStyle.imageCellStyle}>Person3 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
+                </div>
+                <div>
+                    <button className={ModuleStyle.imageCellStyle}>Person4 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person4</h5>
+                </div>
+            </div>
+
+            <h3>Video</h3>
+            <div style={{display:"flex", marginTop:"-30px"}}>
+                
+                
+                <div className="video-preview">
+                    <video src={video_path} controls width="400" />
+                </div>
+                
+                
+                
+                <div className={ModuleStyle.editOptionContainer}> 
+                    <h3 style={{marginLeft:"20px"}}> Edit Options </h3> 
+                    <h4 style={{marginLeft:"20px"}}>bluring Option</h4>
+                    <div style={{display:"flex", marginTop:"-20px"}}>
+                        <div className={ModuleStyle.editOption_gaussian} style={{marginTop:"20px", marginLeft:"20px"}}></div>
+                    </div>    
+    
+                    <button className="edit-button">Video Edit</button>
+                </div>
+
+            </div>
+        </Modal>}
+    
     </div>
 }
 

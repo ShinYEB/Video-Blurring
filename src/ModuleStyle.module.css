@@ -138,8 +138,8 @@
     background-position: center; /* 이미지 위치 */
     width: 30px;
     height: 30px;
-    margin-left: 20px; 
-    margin-top: 20px;
+    margin-left: 2px; 
+    margin-top: 2px;
 }
 
 .editOption_mozaik {
@@ -188,6 +188,20 @@
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 3%;
+}
+
+.imageCellStyle.clicked {
+    border-color: #7391c8; /* 클릭 상태에서의 색상 */
+}
+
+.imageDeleteButton {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #ddd;
+    border-radius: 45%;
+    background-color: white;
+    margin-top: -10px;
+    margin-left: -12px;
 }
 
 .cancelButton {
