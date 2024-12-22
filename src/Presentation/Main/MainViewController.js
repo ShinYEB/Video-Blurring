@@ -99,7 +99,7 @@ function MainViewController() {
                     <div className="video-item" style={{display:"flex"}}>
                         <div className="thumbnail">thumbnail</div>
                         <div style={{marginLeft:"20px"}}>
-                            <h2 style={{textAlign:"left", marginTop:"20px"}}>Sample video1</h2>
+                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video1</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
                             <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>
@@ -110,7 +110,7 @@ function MainViewController() {
                     <div className="video-item" style={{display:"flex"}}>
                         <div className="thumbnail">thumbnail</div>
                         <div style={{marginLeft:"20px"}}>
-                            <h2 style={{textAlign:"left", marginTop:"20px"}}>Sample video2</h2>
+                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video2</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
                             <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>
@@ -121,7 +121,7 @@ function MainViewController() {
                     <div className="video-item" style={{display:"flex"}}>
                         <div className="thumbnail">thumbnail</div>
                         <div style={{marginLeft:"20px"}}>
-                        <h2 style={{textAlign:"left", marginTop:"20px"}}>Sample video3</h2>
+                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video3</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
                             <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>

@@ -50,15 +50,15 @@ function VideoEditViewController() {
             </nav>
        </header>
 
-       <h2 style={{marginTop:"100px", marginLeft:"270px"}}>{video_title}</h2>
+       <h2 style={{marginTop:"100px", marginLeft:"180px"}}>{video_title}</h2>
        <div className="video-preview" style={{margin:"auto"}}>
             <video src={video_path} controls width="400" />
         </div>
-        <button className="cta-button" style={{marginLeft:"560px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>
+        <button className="cta-button" style={{marginLeft:"480px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>
     
-        <h2 style={{marginTop:"100px", marginLeft:"270px"}}>Video Download</h2>
+        <h2 style={{marginTop:"100px", marginLeft:"190px"}}>Video Download</h2>
         
-        <div style={{marginLeft:"270px", display:"flex"}}>
+        <div style={{marginLeft:"180px", display:"flex"}}>
             <div className="thumbnail">thumbnail #클릭 시 비디오 다운로드</div>
             <div className="thumbnail" style={{marginLeft:"30px"}}>thumbnail #클릭 시 비디오 다운로드</div>
         </div>
