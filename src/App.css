@@ -2,6 +2,17 @@
   text-align: center;
 }
 
+.logo {
+  background-image: url('/public/logo2.PNG');
+  background-size:contain; /* 이미지 크기 조정 */
+  background-repeat: no-repeat; /* 반복 제거 */
+  background-position: center; /* 이미지 위치 */
+  width: 140px;
+  height: 90px;
+  margin-left: 2px; 
+  margin-top: 2px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -119,6 +130,9 @@
 
 /* 이미지 섹션 */
 .hero-image {
+  background-size:contain; /* 이미지 크기 조정 */
+  background-repeat: no-repeat; /* 반복 제거 */
+  background-position: center; /* 이미지 위치 */
   flex: 1;
   background-size: cover;
   background-position: center;
