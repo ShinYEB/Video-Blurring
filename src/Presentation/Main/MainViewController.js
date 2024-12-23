@@ -73,7 +73,7 @@ function MainViewController() {
     
     return <div className={ModuleStyle.pageStyle}>
         <header className="header">
-        <h1 className="logo">Video Blurring Website</h1>
+        <h1 className="logo">Blur Studio</h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
             {(isLogin) && <a href="/mypage" className="nav-item">My Page</a>}
@@ -85,7 +85,7 @@ function MainViewController() {
         <section className="hero">
             <div className="hero-content">
                 <h2>Video Blurring Made Easy</h2>
-                <p>Edit and blur videos effortlessly with intuitive controls.</p>
+                <p> 동영상을 쉽게 편집하고 블러를 추가하세요.</p>
                 {(isLogin) && <button className="cta-button" onClick={() => setUploadModal(true)}>Upload Video</button>}
                 {(!isLogin) && <button className="cta-button" onClick={() => navigate("\login")}>Get Started</button>}
             </div>
@@ -171,7 +171,7 @@ function MainViewController() {
                 />
             </div>
             
-            <h3>Blur Select</h3>
+            <h4 >블러 대상 선택</h4>
             <div style={{display:"flex"}}>
                 <div>
                     <button className={ModuleStyle.imageCellStyle}>Person1 Image</button>
@@ -240,7 +240,7 @@ function MainViewController() {
                     type="range" min={0} max={1} color="gray" step={0.02} value={parameter2} onChange={(event) => { setParameter2(event.target.valueAsNumber); }}/>
                     {parameter2}
                     */}
-                    <button className="edit-button">Save and Apply</button>
+                    <button className="edit-button">저장</button>
                 </div>
 
             </div>

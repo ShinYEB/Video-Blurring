@@ -36,7 +36,7 @@ function MypageViewController() {
 
     return <div className={ModuleStyle.contentPageStyle}>
         <header className="header">
-        <h1 className="logo">Video Blurring Website</h1>
+        <h1 className="logo">Blur Studio</h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
             <a href="/mypage" className="nav-item">My Page</a>
@@ -46,36 +46,36 @@ function MypageViewController() {
        <h2 style={{marginTop:"100px", marginLeft:"270px"}}>Mypage</h2>
 
         <div style={{marginLeft:"270px"}}>
-            <h3>Blur Select</h3>
+            <h3>블러 대상 관리</h3>
             <div style={{display:"flex", marginLeft:"-20px"}}>
                 <div>
                     <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person1 Image #클릭시 이미지 관리 화면으로 이동</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
+                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person1</h5>
                 </div>
                 <div>
                     <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person2 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
+                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person2</h5>
                 </div>
                 <div>
                     <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person3 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
+                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person3</h5>
                 </div>
                 <div>
                     <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person4 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person4</h5>
+                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person4</h5>
                 </div>
             </div>
 
 
-            <h3 style={{marginTop:"50px"}}>My Info</h3>
+            <h3 style={{marginTop:"50px"}}>내 정보</h3>
 
-            <h4>User Name : name </h4>
+            <h4>사용자 이름 : name </h4>
 
             <div style={{display:"flex"}}>
-                <h4>Password : **** </h4>
+                <h4>비밀번호 : **** </h4>
                 <button className="pw-edit-button"> edit </button>
             </div>
-            <a href="/" className="nav-item" >withdraw</a>
+            <a href="/" className="nav-item" >회원탈퇴</a>
 
         </div>
 

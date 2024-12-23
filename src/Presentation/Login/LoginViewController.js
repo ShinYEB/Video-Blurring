@@ -31,7 +31,7 @@ function LoginViewController() {
 
     return <div className={ModuleStyle.pageStyle}>
         <header className="header">
-        <h1 className="logo">Video Blurring Website</h1>
+        <h1 className="logo">Blur Studio</h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
             <a href="/mypage" className="nav-item">My Page</a>

@@ -43,7 +43,7 @@ function VideoEditViewController() {
 
     return <div className={ModuleStyle.contentPageStyle}>
         <header className="header">
-        <h1 className="logo">Video Blurring Website</h1>
+        <h1 className="logo">Blur Studio</h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
             <a href="/mypage" className="nav-item">My Page</a>
@@ -95,7 +95,7 @@ function VideoEditViewController() {
                 {video_title}
             </div>
             
-            <h3>Blur Select</h3>
+            <h4>블러 대상 선택</h4>
             <div style={{display:"flex"}}>
                 <div>
                     <button className={ModuleStyle.imageCellStyle}>Person1 Image</button>
@@ -132,7 +132,7 @@ function VideoEditViewController() {
                         <div className={ModuleStyle.editOption_gaussian} style={{marginTop:"20px", marginLeft:"20px"}}></div>
                     </div>    
     
-                    <button className="edit-button">Video Edit</button>
+                    <button className="edit-button" style={{marginTop:"280px"}}>저장</button>
                 </div>
 
             </div>
