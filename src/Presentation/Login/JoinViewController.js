@@ -28,9 +28,21 @@ function JoinViewController() {
     const navigate = useNavigate();
     const network = new Network()
 
-    const registering = () => {
+    const registering = async () => {
         let data = {"username":ID, "password":PW}
-        network.post(data, "/api/auth/register")
+        try{
+            const response = await network.post(data, "/api/auth/register")
+            
+            if(response.success == true) {
+               alert("회원가입 성공했습니다.")
+               navigate("/login")
+            }
+            else {
+                alert("실패")
+            }
+        } catch (error) {
+            console.error('Error: ', error)
+        }
     }
 
     return <div className={ModuleStyle.pageStyle}>

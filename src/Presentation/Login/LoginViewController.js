@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ModuleStyle from "../../ModuleStyle.module.css";
 import '../../App.css';
+import Network from "../../Domain/Network/Network";
 
 function LoginViewController() {
 
@@ -23,10 +24,24 @@ function LoginViewController() {
         setPW(event.target.value);
     };
 
+    const network = new Network();
     const navigate = useNavigate();
 
-    const logining = () => {
-    
+    const logining = async () => {
+        let data = {"username":ID, "password":PW}
+        try{
+            const response = await network.post(data, "/api/auth/register")
+        
+            if(response.success == true) {
+                dataToSend.token = response.data.access
+                navigate("/", {state: dataToSend})
+            }
+            else {
+                alert("로그인에 실패했습니다.")
+            }
+        } catch (error) {
+            console.error('Error: ', error)
+        }
     }
 
     return <div className={ModuleStyle.pageStyle}>

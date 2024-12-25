@@ -35,10 +35,10 @@ function VideoEditViewController() {
     const [isUploadModalOpen, setUploadModal] = useState(false)
 
     const location = useLocation();
-    const { video_title, video_path } = location.state || {}; // 전달된 값 받기
+    const { video, token } = location.state || {}; // 전달된 값 받기
 
     useState(() => {
-
+        
     }, [])
 
     return <div className={ModuleStyle.contentPageStyle}>
@@ -50,9 +50,9 @@ function VideoEditViewController() {
             </nav>
        </header>
 
-       <h2 style={{marginTop:"100px", marginLeft:"180px"}}>{video_title}</h2>
+       <h2 style={{marginTop:"100px", marginLeft:"180px"}}>video.video_title</h2>
        <div className="video-preview" style={{margin:"auto"}}>
-            <video src={video_path} controls width="400" />
+            <video src={video.video_file} controls width="400" />
         </div>
         <button className="cta-button" style={{marginLeft:"480px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>
     
@@ -92,7 +92,7 @@ function VideoEditViewController() {
             
             <div className="video-name">
                 <label htmlFor="video-name-input" className="video-name-label">Video Name:</label>
-                {video_title}
+                video.video_title
             </div>
             
             <h4>블러 대상 선택</h4>
@@ -120,7 +120,7 @@ function VideoEditViewController() {
                 
                 
                 <div className="video-preview">
-                    <video src={video_path} controls width="400" />
+                    <video src={video.video_file} controls width="400" />
                 </div>
                 
                 

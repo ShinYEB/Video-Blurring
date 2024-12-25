@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "react-modal/lib/components/Modal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import ModuleStyle from "../../ModuleStyle.module.css"
+import Network from "../../Domain/Network/Network";
 
 function MypageViewController() {
 
@@ -31,8 +32,32 @@ function MypageViewController() {
         }
     }
 
+    const network = new Network()
+    const location = useLocation();
+
+    const { token } = location.state || {}
     const [isModalOpen, setModal] = useState(false)
     const [name, setName] = useState("Name");  
+    const [peopleList, setPeopleList] = useState([])
+    const [isPeopleList, setIsPeopleList] = useState(false)
+
+    const getPeopleList = async () => {
+        try{
+            const response = await network.get_with_token("/api/people", token)
+            if(response.code == "200") {
+               setPeopleList(response.data)
+               setIsPeopleList(true)
+            }
+        } catch (error) {
+            console.error('Error: ', error)
+        }
+    }
+
+    useState(() => {
+        if (token) {
+
+        }
+    }, [])
 
     return <div className={ModuleStyle.contentPageStyle}>
         <header className="header">
@@ -48,22 +73,12 @@ function MypageViewController() {
         <div style={{marginLeft:"270px"}}>
             <h3>블러 대상 관리</h3>
             <div style={{display:"flex", marginLeft:"-20px"}}>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person1 Image #클릭시 이미지 관리 화면으로 이동</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person1</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person2 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person2</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person3 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person3</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person4 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person4</h5>
-                </div>
+                {(isPeopleList) && peopleList.map((people) => (
+                    <div>
+                        <button className={ModuleStyle.imageCellStyle} onClick={() => {setModal(true)}}>Person1 Image</button>
+                        <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person1</h5>
+                    </div>
+                ))}
             </div>
 
 

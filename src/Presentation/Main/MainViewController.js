@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ModuleStyle from "../../ModuleStyle.module.css";
 import '../../App.css';
+import Network from "../../Domain/Network/Network";
 
 function MainViewController() {
 
@@ -37,7 +38,7 @@ function MainViewController() {
         video_path: "/public/video.mp4"
     };
 
-
+    const network = new Network()
     const location = useLocation();
     const { token } = location.state || {}; // 전달된 값 받기
     
@@ -45,9 +46,13 @@ function MainViewController() {
 
     const [isLogin, setLogin] = useState(false)
     const [isUploadModalOpen, setUploadModal] = useState(false)
-    const [videoName, setVideoName] = useState("Sample Video 4");  
+    const [videoName, setVideoName] = useState("Video Title");  
+
+    const [videos, setVideos] = useState([]);
+    const [isVideo, setIsVideo] = useState(false);
 
     const [videoFile, setVideoFile] = useState(null);
+    const [faceImages, setFaceImages] = useState([]);
     const fileInputRef = useRef(null);
 
     const [parameter1, setParameter1] = useState(0)
@@ -65,9 +70,51 @@ function MainViewController() {
         }
     };
 
+    const loadVideo = async () => {
+        try{
+            const response = await network.get_with_token("/api/video", token)
+            if(response.code == "200") {
+               setVideos(response.data)
+               setIsVideo(true)
+               console.log(response.data)
+            }
+        } catch (error) {
+            console.error('Error: ', error)
+        }
+    }
+
+    const videoUpload = async () => {
+        try{
+            const formData = new FormData();
+            
+            if (videoFile) {
+                formData.append('video_file', videoFile); // 'video_file' 필드 이름
+            }
+
+            faceImages.forEach((file, index) => {
+                formData.append('face_images', file); // 'face_images' 필드 이름
+            });
+
+
+            const response = await network.post_multi(formData,"/api/video/video-blur", token)
+
+            if (response.message == "Video processed successfully") {
+                alert("업로드 성공!")
+                setUploadModal(false)
+            }
+            else {
+                alert("업로드 실패")
+            }
+        } catch (error) {
+            console.error('Error :', error)
+        }
+
+    }
+
     useEffect(() => {
         if (token) {
             setLogin(true)
+            loadVideo()
         }
     }, []);
     
@@ -76,9 +123,9 @@ function MainViewController() {
         <h1 className="logo"></h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
-            {(isLogin) && <a href="/mypage" className="nav-item">My Page</a>}
-            {(!isLogin) && <a href="/login" className="nav-item">Log In</a>}
-            {(isLogin) && <a href="/home" className="nav-item">Log out</a>}
+            {(isLogin) && <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>}
+            {(!isLogin) && <Link to="/login" className="nav-item">Log In</Link>}
+            {(isLogin) && <Link to="/home" className="nav-item">Log out</Link>}
             </nav>
        </header>
 
@@ -95,39 +142,17 @@ function MainViewController() {
         {(isLogin) && <section className="video-library">
             <h2>Video Library</h2>
             <div className="video-grid">
-                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: dataToSend})}}>
+                {(isVideo) && videos.map((video) => (
+                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: {"video":video, "token":token}})}}>
                     <div className="video-item" style={{display:"flex"}}>
-                        <div className="thumbnail">thumbnail</div>
+                        <video src={video.video_file} style={{width:"300px", height:"230px"}} />
                         <div style={{marginLeft:"20px"}}>
-                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video1</h3>
+                            <h3 style={{textAlign:"left", marginTop:"20px"}}>video title</h3>
                             <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
-                            <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>
+                            <h3 style={{textAlign:"left", marginTop:"140px"}}>upload : {video.created_at.substr(0, 10)}</h3>
                         </div>
                     </div>
-                </button>
-                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video2"; navigate("/video", {state: dataToSend})}}>
-                    <div className="video-item" style={{display:"flex"}}>
-                        <div className="thumbnail">thumbnail</div>
-                        <div style={{marginLeft:"20px"}}>
-                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video2</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
-                            <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>
-                        </div>
-                    </div>
-                </button>
-                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video3"; navigate("/video", {state: dataToSend})}}>
-                    <div className="video-item" style={{display:"flex"}}>
-                        <div className="thumbnail">thumbnail</div>
-                        <div style={{marginLeft:"20px"}}>
-                            <h3 style={{textAlign:"left", marginTop:"20px"}}>Sample video3</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
-                            <h3 style={{textAlign:"left", marginTop:"90px"}}>upload : 24.12.22</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>last update : 24.12.22</h3>
-                        </div>
-                    </div>
-                </button>
+                </button>))}
             </div>
         </section>}
         
