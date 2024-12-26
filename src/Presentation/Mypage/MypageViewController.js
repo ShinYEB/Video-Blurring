@@ -55,6 +55,7 @@ function MypageViewController() {
             zIndex:20,
         }
     }
+    
 
     const network = new Network()
     const location = useLocation();
@@ -63,13 +64,22 @@ function MypageViewController() {
     const [isModalOpen, setModal] = useState(false)
     const [isAddModalOpen, setAddModal] = useState(false)
     const [name, setName] = useState("Name");  
-    const [peopleList, setPeopleList] = useState([])
+    const [peopleList, setPeopleList] = useState([{"name":"한지민", "img":`${process.env.PUBLIC_URL}/HJM.png`}])
     const [isPeopleList, setIsPeopleList] = useState(false)
     const [imageList, setImageList] = useState([])
     const [isImageList, setIsImageList] = useState(false)
 
     const [addImageList, setAddImageList] = useState([])
     const [isAddImage, setIsAddImage] = useState(false)
+
+    const [person1, setperson1] = useState(false)
+    const [person2, setperson2] = useState(false)
+    const [person3, setperson3] = useState(false)
+    const [person4, setperson4] = useState(false)
+    const [person5, setperson5] = useState(false)
+
+    const pl = [person1, person2, person3, person4, person5]
+    const sl = [setperson1, setperson2, setperson3, setperson4, setperson5]
 
 
     const fileInputRef = useRef(null);
@@ -186,18 +196,23 @@ function MypageViewController() {
             <div style={{backgroundColor:"#f1e9df", width:"550px", height:"80px", padding:"50px", borderRadius:"1%"}}>
             <h3 style={{marginLeft:"35px"}}>Tip : 정면1장 필수! 측면 사진을 더해주면 성능이 올라가요! </h3>
             </div>
-            <div style={{display:"flex", marginLeft:"-20px"}}>
-                {(isPeopleList) && peopleList.map((people) => (
-                    <div>
-                        <button className={ModuleStyle.imageCellStyle} onClick={() => {getImageList(people.peopleId); setModal(true)}}>Person1 Image</button>
-                        <h5 style={{textAlign:"center", marginTop:"10px", marginLeft:"20px"}}>Person1</h5>
-                    </div>
-                ))}
+            <div style={{display:"flex", marginTop:"20px"}}>
+                {peopleList.map((people, index) => (<div>
+                    
+                    {(pl[index]) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"10px"}}>
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {sl[index](false)}}><img src={people.img} style={{width:"100px", height:"105px"}}/></button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>{people.name}</h5>
+                    </div>}
+                    {(!pl[index]) && <div style={{border:"1px solid white", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"10px"}}>
+                        <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {sl[index](false)}}><img src={people.img} style={{width:"100px", height:"105px"}}/></button>
+                        <h5 style={{textAlign:"center", marginTop:"10px"}}>{people.name}</h5>
+                    </div>}
+                </div>))}
                 <button className={ModuleStyle.personAddButton} style={{backgroundImage:"/public/", width:"50px", height:"50px", marginTop:"35px"}} onClick={() => {setAddModal(true)}}></button>
             </div>
 
 
-            <h3 style={{marginTop:"50px"}}>내 정보</h3>
+            <h3 style={{marginTop:"150px"}}>내 정보</h3>
 
             <h4>사용자 이름 : name </h4>
 
@@ -309,7 +324,10 @@ function MypageViewController() {
                     style={{ display: "none" }}
                     onChange={handleFileChange}
                 />
-                <button className="edit-button">저장</button>
+                <button className="edit-button" onClick={() => {  setPeopleList([...peopleList, { 
+                        name: name,
+                        img: imageList[0]
+                        }]); alert("추가했습니다!"); setAddModal(false)}}>저장</button>
             </div>
         </Modal>}
     </div>

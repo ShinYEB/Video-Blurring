@@ -328,7 +328,7 @@
     height: 10px;
     margin-left: 40px; 
     margin-top: 30px;
-    background-color: #cdcabf;
-    border: 1px solid #ddd;
-    border-radius: 5%;
+    background-color: white;
+    border: 0px solid #ddd;
+    border-radius: 50%;
 }

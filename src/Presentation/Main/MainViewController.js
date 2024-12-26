@@ -22,7 +22,31 @@ function MainViewController() {
         content: {
             position: 'absolute',
             width: '1000px',
-            height: '870px',
+            height: '880px',
+            margin: 'auto',
+            border: '1px solid #ccc',
+            background: '#fff',
+            borderRadius: '1%',
+            outline: 'none',
+            padding: '2%',
+            zIndex:20,
+        }
+    }
+
+    const AddPeopleModalstyle = {
+        overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0, 
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex:15
+        },
+        content: {
+            position: 'absolute',
+            width: '750px',
+            height: '645px',
             margin: 'auto',
             border: '1px solid #ccc',
             background: '#fff',
@@ -58,10 +82,26 @@ function MainViewController() {
     const [parameter1, setParameter1] = useState(0)
     const [parameter2, setParameter2] = useState(0)
 
+    const [imageList, setImageList] = useState([])
+    const [isAddImage, setIsAddImage] = useState(false)
+
+    const [peopleList, setPeopleList] = useState([{"name":"한지민", "img":`${process.env.PUBLIC_URL}/HJM.png`}])
+
+    const [name, setName] = useState("Name");  
+    const [isAddModalOpen, setAddModal] = useState(false)
+
     const [person1, setperson1] = useState(false)
     const [person2, setperson2] = useState(false)
     const [person3, setperson3] = useState(false)
     const [person4, setperson4] = useState(false)
+    const [person5, setperson5] = useState(false)
+
+    const pl = [person1, person2, person3, person4, person5]
+    const sl = [setperson1, setperson2, setperson3, setperson4, setperson5]
+
+    const [button1, setbutton1] = useState(false)
+    const [button2, setbutton2] = useState(true)
+    const [button3, setbutton3] = useState(false)
 
     const [showTooltip, setShowTooltip] = useState(false);
 
@@ -76,6 +116,17 @@ function MainViewController() {
         setVideoFile(videoUrl); // 동영상 파일 저장
         }
     };
+
+    const handleFileChangeImage = (event) => {
+        const files =  Array.from(event.target.files);
+        const newFile = files.map((file) => URL.createObjectURL(file));
+        if (newFile) {
+            console.log("선택된 파일:", newFile);
+            setImageList(newFile)       
+            setIsAddImage(true)
+        }
+    };
+
 
     const loadVideo = async () => {
         try{
@@ -121,7 +172,9 @@ function MainViewController() {
     useEffect(() => {
         if (token) {
             setLogin(true)
-            loadVideo()
+            //loadVideo()
+            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4", "created_at": "2024-12-25T18:45:44.610474+09:00"}])
+            setIsVideo(true)
         }
     }, []);
     
@@ -154,8 +207,8 @@ function MainViewController() {
                     <div className="video-item" style={{display:"flex"}}>
                         <video src={video.video_file} style={{width:"300px", height:"230px"}} />
                         <div style={{marginLeft:"20px"}}>
-                            <h3 style={{textAlign:"left", marginTop:"20px"}}>video title</h3>
-                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 05 : 00</h3>
+                            <h3 style={{textAlign:"left", marginTop:"20px"}}>{video.title}</h3>
+                            <h3 style={{textAlign:"left", marginTop:"-10px"}}>00 : 00 : 17</h3>
                             <h3 style={{textAlign:"left", marginTop:"140px"}}>upload : {video.created_at.substr(0, 10)}</h3>
                         </div>
                     </div>
@@ -204,31 +257,21 @@ function MainViewController() {
             </div>
             
             <h4 >블러 제외 선택</h4>
-            <div style={{display:"flex"}}>
-                {(person1) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%"}}>
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson1(false)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
-                </div>}
-                {(!person1) && <div> 
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson1(true)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
-                </div>}
-                {(person2) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"15px"}}>
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson2(false)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
-                </div>}
-                {(!person2) && <div style={{marginLeft:"15px"}}> 
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson2(true)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
-                </div>}
-                {(person3) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"15px"}}>
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson3(false)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
-                </div>}
-                {(!person3) && <div style={{marginLeft:"15px"}}> 
-                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson3(true)}}>Person1 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
-                </div>}
+            <div style={{display:"flex", height:"180px"}}>
+                {peopleList.map((people, index) => (<div>
+                    
+                    {(pl[index]) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"10px"}}>
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {sl[index](false)}}><img src={people.img} style={{width:"100px", height:"105px"}}/></button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>{people.name}</h5>
+                    </div>}
+                    {(!pl[index]) && <div style={{border:"1px solid white", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"10px"}}>
+                        <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {sl[index](true)}}><img src={people.img} style={{width:"100px", height:"105px"}}/></button>
+                        <h5 style={{textAlign:"center", marginTop:"10px"}}>{people.name}</h5>
+                    </div>}
+                </div>))}
+                
+                
+                <button className={ModuleStyle.personAddButton} style={{backgroundImage:"/public/", width:"50px", height:"50px", marginTop:"35px"}}  onClick={() => {setAddModal(true)}}></button>
             </div>
 
             <h3>Video</h3>
@@ -272,20 +315,24 @@ function MainViewController() {
                     </div>    
                     <div style={{display:"flex"}}>
                         <h4 style={{marginLeft:"20px"}}>얼굴 인식 강도</h4>
-                        <button onClick={() => {console.log("ss"); setShowTooltip(!showTooltip)}} style={{width:"15px", height:"15px", borderRadius:"50%", backgroundColor:"white", marginTop:"25px", marginLeft:"10px"}} ><p style={{marginTop:"-2px", marginLeft:"-4px"}}>?</p></button>
+                        <button onClick={() => {setShowTooltip(!showTooltip)}} style={{width:"15px", height:"15px", borderRadius:"50%", backgroundColor:"white", marginTop:"25px", marginLeft:"10px"}} ><p style={{marginTop:"-2px", marginLeft:"-4px"}}>?</p></button>
                     </div>
                     <div style={{display:"flex", marginLeft:"20px", marginTop:"-20px"}}>
                         <div>
                             <p>약</p>
-                            <button style={{width:"70px", height:"20px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>
+                            {(button1) && <button onClick={() => {setbutton1(false); setbutton2(false); setbutton3(false);}} style={{width:"70px", height:"30px", backgroundColor:"#a47864", border:"1px solid gray", borderRadius:"10%"}}></button>}
+                            {(!button1) && <button onClick={() => {setbutton1(true); setbutton2(false); setbutton3(false);}} style={{width:"70px", height:"30px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>}
                         </div>
                         <div style={{marginLeft:"5px", marginTop:"53px"}}>
-                            <button style={{width:"70px", height:"20px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>
+                            {(button2) && <button onClick={() => {setbutton1(false); setbutton2(true); setbutton3(false);}} style={{width:"70px", height:"30px", backgroundColor:"#a47864", border:"1px solid gray", borderRadius:"10%"}}></button>}
+                            {(!button2) && <button onClick={() => {setbutton1(false); setbutton2(true); setbutton3(false);}} style={{width:"70px", height:"30px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>}
                         </div>
                         <div style={{marginLeft:"5px"}}>
                             <p style={{marginLeft:"45px"}}>강</p>
-                            <button style={{width:"70px", height:"20px", backgroundColor:"#a47864", border:"1px solid gray", borderRadius:"10%"}}></button>
+                            {(button3) && <button onClick={() => {setbutton1(false); setbutton2(false); setbutton3(true);}} style={{width:"70px", height:"30px", backgroundColor:"#a47864", border:"1px solid gray", borderRadius:"10%"}}></button>}
+                            {(!button3) && <button onClick={() => {setbutton1(false); setbutton2(false); setbutton3(true);}} style={{width:"70px", height:"30px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>}
                         </div>
+                        
                     </div>
                     <div style={{display:"flex", marginTop:"-20px"}}>
                         
@@ -300,7 +347,13 @@ function MainViewController() {
                     type="range" min={0} max={1} color="gray" step={0.02} value={parameter2} onChange={(event) => { setParameter2(event.target.valueAsNumber); }}/>
                     {parameter2}
                     */}
-                    <button className="edit-button" onClick={() => {videoUpload()}}>저장</button>
+                    <button className="edit-button2" onClick={() => {alert("저장되었습니다."); setVideos([...videos, { 
+                        title: name,
+                        id: 1, 
+                        video_file: videoFile, 
+                        created_at: "2024-12-27T18:45:44.610474+09:00"
+                        }]);
+                        setUploadModal(false);}}>저장</button>
                 </div>
 
             </div>
@@ -327,6 +380,46 @@ function MainViewController() {
             약: 등록사진과 영상 사진의 얼굴이 달라도 괜찮아요<br/>
         </div>
       )}
+
+      {(isAddModalOpen) && <Modal style={AddPeopleModalstyle} isOpen={isAddModalOpen}>
+            <div style={{display:"flex"}}>
+                <h1 style={{marginTop:"-10px"}}>블러 대상 추가</h1>
+                <button className={ModuleStyle.cancelButton} onClick={() => {setImageList([]); setAddModal(false);}}>X</button>                
+            </div>
+
+            <div className="video-name">
+                <label htmlFor="video-name-input" className="video-name-label">Name:</label>
+                <input
+                    type="text"
+                    id="video-name-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="video-name-input"
+                />
+            </div>
+            <h3>Images</h3>
+            <div style={{width:"750px", height:"400px", display:"flex", marginLeft:"-15px"}}>
+                {(isAddImage) && imageList.map((image) => (<div style={{border:"1px solid gray", borderRadius:"5%", width:"110px", height:"110px", paddingLeft:"5px", paddingTop:"5px", marginTop:"15x", marginLeft:"15px"}}>
+                        <img src={image} style={{ width: "100px", height:"100px" }} />
+                    </div>
+                ))}
+            </div>
+            <div style={{display:"flex", margin:"auto", marginTop:"-200px", width:"400px"}}>
+                <button className="edit-button" style={{backgroundColor:"#f1e9df", color:"gray"}} onClick={handleButtonClick}>이미지 추가</button>
+                <input
+                    type="file"
+                    accept="image/*"
+                    multiple 
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    onChange={handleFileChangeImage}
+                />
+                <button className="edit-button" onClick={() => {  setPeopleList([...peopleList, { 
+                        name: name,
+                        img: imageList[0]
+                        }]); alert("추가했습니다!"); setAddModal(false)}}>저장</button>
+            </div>
+        </Modal>}
     </div>        
 }
 

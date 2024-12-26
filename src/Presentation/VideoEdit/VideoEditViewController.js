@@ -111,7 +111,7 @@ function VideoEditViewController() {
         
         <div style={{marginLeft:"180px", display:"flex"}}>
             <button className="thumbnail" onClick={() => {setDownloadModal(true)}}>
-                <video src={video.video_file} style={{width:"300px", height:"200px"}}/>
+                <video src={video.video_file} style={{width:"275px", height:"200px"}}/>
             </button>
         </div>
 
