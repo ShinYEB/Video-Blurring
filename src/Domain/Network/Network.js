@@ -1,8 +1,8 @@
 import axios from "axios";
 
 class Network {
-    url = "http://127.0.0.1:8000/testapp";
-    //url = "https://a2b1.store";
+    //url = "http://127.0.0.1:8000/testapp";
+    url = "https://a2b1.store";
 
     post = (data, path) => {
         const link = this.url + path

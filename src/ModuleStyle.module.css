@@ -318,3 +318,17 @@
     line-height: 40px ;
     font-size: 20px;
 }
+
+.personAddButton {
+    background-image: url('/public/addPerson.PNG');
+    background-size: 45px; /* 이미지 크기 조정 */
+    background-repeat: no-repeat; /* 반복 제거 */
+    background-position: center; /* 이미지 위치 */
+    width: 10px;
+    height: 10px;
+    margin-left: 40px; 
+    margin-top: 30px;
+    background-color: #cdcabf;
+    border: 1px solid #ddd;
+    border-radius: 5%;
+}

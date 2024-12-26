@@ -29,15 +29,16 @@ function JoinViewController() {
     const network = new Network()
 
     const registering = async () => {
-        let data = {"username":ID, "password":PW}
+        let data = {"username":ID, "password1":PW}
         try{
-            const response = await network.post(data, "/api/auth/register")
+            const response = await network.post(data, "/api/auth/register/")
             
-            if(response.success == true) {
+            if(response.key) {
                alert("회원가입 성공했습니다.")
                navigate("/login")
             }
             else {
+                console.log(response)
                 alert("실패")
             }
         } catch (error) {
@@ -57,7 +58,7 @@ function JoinViewController() {
 
         <div style={{margin:"auto", marginTop:"300px", display:"table"}}>
                 <div style={{display:"table-cell", verticalAlign:"middle"}}>
-                    <h2  onClick={() => {navigate("/")}}> 회원가입 </h2>
+                    <h2  onClick={() => {navigate("/login")}}> 회원가입 </h2>
                     <div style={{marginTop:"-20px"}}>
                         <div>
                             <input className={ModuleStyle.inputBox} placeholder="   아이디" onChange={saveID}/><p style={{height:"0px"}}/>

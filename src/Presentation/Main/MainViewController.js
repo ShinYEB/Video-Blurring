@@ -58,6 +58,13 @@ function MainViewController() {
     const [parameter1, setParameter1] = useState(0)
     const [parameter2, setParameter2] = useState(0)
 
+    const [person1, setperson1] = useState(false)
+    const [person2, setperson2] = useState(false)
+    const [person3, setperson3] = useState(false)
+    const [person4, setperson4] = useState(false)
+
+    const [showTooltip, setShowTooltip] = useState(false);
+
     const handleButtonClick = () => {
         fileInputRef.current.click(); // 숨겨진 파일 입력 클릭
     };
@@ -196,24 +203,32 @@ function MainViewController() {
                 />
             </div>
             
-            <h4 >블러 대상 선택</h4>
+            <h4 >블러 제외 선택</h4>
             <div style={{display:"flex"}}>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle}>Person1 Image</button>
+                {(person1) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%"}}>
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson1(false)}}>Person1 Image</button>
                     <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle}>Person2 Image</button>
+                </div>}
+                {(!person1) && <div> 
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson1(true)}}>Person1 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person1</h5>
+                </div>}
+                {(person2) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"15px"}}>
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson2(false)}}>Person1 Image</button>
                     <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle}>Person3 Image</button>
+                </div>}
+                {(!person2) && <div style={{marginLeft:"15px"}}> 
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson2(true)}}>Person1 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person2</h5>
+                </div>}
+                {(person3) && <div style={{border:"1px solid blue", width:"120px", height:"120px", borderRadius:"5%", marginLeft:"15px"}}>
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson3(false)}}>Person1 Image</button>
                     <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
-                </div>
-                <div>
-                    <button className={ModuleStyle.imageCellStyle}>Person4 Image</button>
-                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person4</h5>
-                </div>
+                </div>}
+                {(!person3) && <div style={{marginLeft:"15px"}}> 
+                    <button className={ModuleStyle.imageCellStyle} style={{marginLeft:"0px"}} onClick={() => {setperson3(true)}}>Person1 Image</button>
+                    <h5 style={{textAlign:"center", marginTop:"10px"}}>Person3</h5>
+                </div>}
             </div>
 
             <h3>Video</h3>
@@ -246,7 +261,7 @@ function MainViewController() {
                     <h3 style={{marginLeft:"20px"}}> Edit Options </h3> 
                     <h4 style={{marginLeft:"20px"}}>bluring Option</h4>
                     <div style={{display:"flex", marginTop:"-20px"}}>
-                        <div style={{width:"35px", height:"35px", backgroundColor:"#7391c8", margin:"30px"}}>
+                        <div style={{width:"35px", height:"35px", margin:"20px"}}>
                             <div className={ModuleStyle.editOption_gaussian} style={{}}></div>
                         </div>
                         
@@ -255,6 +270,26 @@ function MainViewController() {
                         <div className={ModuleStyle.editOption} style={{backgroundColor:"black"}}></div>
                         <div className={ModuleStyle.editOption} style={{backgroundColor:"gray"}}></div>*/}
                     </div>    
+                    <div style={{display:"flex"}}>
+                        <h4 style={{marginLeft:"20px"}}>얼굴 인식 강도</h4>
+                        <button onClick={() => {console.log("ss"); setShowTooltip(!showTooltip)}} style={{width:"15px", height:"15px", borderRadius:"50%", backgroundColor:"white", marginTop:"25px", marginLeft:"10px"}} ><p style={{marginTop:"-2px", marginLeft:"-4px"}}>?</p></button>
+                    </div>
+                    <div style={{display:"flex", marginLeft:"20px", marginTop:"-20px"}}>
+                        <div>
+                            <p>약</p>
+                            <button style={{width:"70px", height:"20px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>
+                        </div>
+                        <div style={{marginLeft:"5px", marginTop:"53px"}}>
+                            <button style={{width:"70px", height:"20px", backgroundColor:"white", border:"1px solid gray", borderRadius:"10%"}}></button>
+                        </div>
+                        <div style={{marginLeft:"5px"}}>
+                            <p style={{marginLeft:"45px"}}>강</p>
+                            <button style={{width:"70px", height:"20px", backgroundColor:"#a47864", border:"1px solid gray", borderRadius:"10%"}}></button>
+                        </div>
+                    </div>
+                    <div style={{display:"flex", marginTop:"-20px"}}>
+                        
+                    </div>
                     {/*<h4 style={{marginLeft:"20px"}}>Yolo Option</h4>
                     <h5 style={{marginLeft:"20px"}}>parameter1</h5>
                     <input style={{marginLeft:"20px"}} 
@@ -265,11 +300,33 @@ function MainViewController() {
                     type="range" min={0} max={1} color="gray" step={0.02} value={parameter2} onChange={(event) => { setParameter2(event.target.valueAsNumber); }}/>
                     {parameter2}
                     */}
-                    <button className="edit-button">저장</button>
+                    <button className="edit-button" onClick={() => {videoUpload()}}>저장</button>
                 </div>
 
             </div>
         </Modal>}
+
+        {showTooltip && (
+        <div
+          style={{
+            position: "absolute",
+            top: "52.5%",
+            left: "83%",
+            transform: "translateX(-50%)",
+            background: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            padding: "8px",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+            zIndex: 100,
+            whiteSpace: "nowrap",
+          }}
+        >
+            강: 영상에서 추출한 얼굴이면 좋아요 <br/>
+            중: 조명과 안경 유무에도 유연해요<br/>
+            약: 등록사진과 영상 사진의 얼굴이 달라도 괜찮아요<br/>
+        </div>
+      )}
     </div>        
 }
 

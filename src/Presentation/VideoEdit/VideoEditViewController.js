@@ -31,11 +31,61 @@ function VideoEditViewController() {
         }
     }
 
+    const downloadModalstyle = {
+        overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0, 
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex:15
+        },
+        content: {
+            position: 'absolute',
+            width: '900px',
+            height: '720px',
+            margin: 'auto',
+            border: '1px solid #ccc',
+            background: '#fff',
+            borderRadius: '1%',
+            outline: 'none',
+            padding: '2%',
+            zIndex:20,
+        }
+    }
+
     const [videoFile, setVideoFile] = useState(null);
     const [isUploadModalOpen, setUploadModal] = useState(false)
+    const [isDownloadModalOpen, setDownloadModal] = useState(false)
+
 
     const location = useLocation();
     const { video, token } = location.state || {}; // 전달된 값 받기
+
+    const handleDownload = async () => {
+        console.log(video.video_file)
+        try {
+          const response = await fetch(video.video_file);
+          const blob = await response.blob();
+    
+          // Blob URL 생성
+          const blobUrl = URL.createObjectURL(blob);
+    
+          // 임시 링크 생성 후 다운로드
+          const link = document.createElement("a");
+          link.href = blobUrl;
+          link.download = "video.mp4"; // 저장될 파일 이름
+          document.body.appendChild(link);
+          link.click();
+    
+          // 링크 제거 및 Blob URL 해제
+          link.remove();
+          URL.revokeObjectURL(blobUrl);
+        } catch (error) {
+          console.error("Download failed:", error);
+        }
+      };
 
     useState(() => {
         
@@ -45,9 +95,10 @@ function VideoEditViewController() {
         <header className="header">
         <h1 className="logo"></h1>
         <nav className="nav">
-            <a href="/" className="nav-item">Main Page</a>
-            <a href="/mypage" className="nav-item">My Page</a>
-            </nav>
+           <Link to="/" className="nav-item" state={{token:token}}>main Page</Link>
+            <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>
+            <Link to="/home" className="nav-item">Log out</Link>
+        </nav>
        </header>
 
        <h2 style={{marginTop:"100px", marginLeft:"180px"}}>video.video_title</h2>
@@ -59,8 +110,9 @@ function VideoEditViewController() {
         <h2 style={{marginTop:"100px", marginLeft:"190px"}}>Video Download</h2>
         
         <div style={{marginLeft:"180px", display:"flex"}}>
-            <div className="thumbnail">thumbnail #클릭 시 비디오 다운로드</div>
-            <div className="thumbnail" style={{marginLeft:"30px"}}>thumbnail #클릭 시 비디오 다운로드</div>
+            <button className="thumbnail" onClick={() => {setDownloadModal(true)}}>
+                <video src={video.video_file} style={{width:"300px", height:"200px"}}/>
+            </button>
         </div>
 
 
@@ -95,7 +147,7 @@ function VideoEditViewController() {
                 video.video_title
             </div>
             
-            <h4>블러 대상 선택</h4>
+            <h4>블러 제외 선택</h4>
             <div style={{display:"flex"}}>
                 <div>
                     <button className={ModuleStyle.imageCellStyle}>Person1 Image</button>
@@ -136,6 +188,20 @@ function VideoEditViewController() {
                 </div>
 
             </div>
+        </Modal>}
+
+        {(isDownloadModalOpen) && <Modal style={downloadModalstyle} isOpen={isDownloadModalOpen}>
+            <div style={{display:"flex"}}>
+                <h1 style={{marginTop:"-10px"}}>Download</h1>
+                <button className={ModuleStyle.cancelButton} onClick={() => {setDownloadModal(false);}}>X</button>                
+            </div>
+
+            <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
+                <video src={video.video_file} controls width="400" />
+            </div>
+
+            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
+        
         </Modal>}
     
     </div>
