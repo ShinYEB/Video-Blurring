@@ -78,6 +78,7 @@ function MainViewController() {
     const [videoFile, setVideoFile] = useState(null);
     const [faceImages, setFaceImages] = useState([]);
     const fileInputRef = useRef(null);
+    const fileInputRef2 = useRef(null);
 
     const [parameter1, setParameter1] = useState(0)
     const [parameter2, setParameter2] = useState(0)
@@ -107,6 +108,10 @@ function MainViewController() {
 
     const handleButtonClick = () => {
         fileInputRef.current.click(); // 숨겨진 파일 입력 클릭
+    };
+
+    const handleButtonClick2 = () => {
+        fileInputRef2.current.click(); // 숨겨진 파일 입력 클릭
     };
     
     const handleFileChange = (event) => {
@@ -405,12 +410,12 @@ function MainViewController() {
                 ))}
             </div>
             <div style={{display:"flex", margin:"auto", marginTop:"-200px", width:"400px"}}>
-                <button className="edit-button" style={{backgroundColor:"#f1e9df", color:"gray"}} onClick={handleButtonClick}>이미지 추가</button>
+                <button className="edit-button" style={{backgroundColor:"#f1e9df", color:"gray"}} onClick={handleButtonClick2}>이미지 추가</button>
                 <input
                     type="file"
                     accept="image/*"
                     multiple 
-                    ref={fileInputRef}
+                    ref={fileInputRef2}
                     style={{ display: "none" }}
                     onChange={handleFileChangeImage}
                 />
