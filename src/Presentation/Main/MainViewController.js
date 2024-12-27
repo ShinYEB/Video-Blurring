@@ -419,7 +419,8 @@ function MainViewController() {
                         title: name,
                         id: 1, 
                         video_file: videoFile, 
-                        created_at: "2024-12-27T18:45:44.610474+09:00"
+                        created_at: "2024-12-27T18:45:44.610474+09:00",
+                        dl2: "https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4"
                         }]);
                         alert("업로드 되었습니다."); setUploadtime(false); setEdittime(true); setShowTooltip(false);}, 7000); ; }} 
                         
