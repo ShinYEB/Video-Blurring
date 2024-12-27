@@ -237,7 +237,7 @@ function MainViewController() {
         if (token) {
             setLogin(true)
             //loadVideo()
-            setVideos([{"title":"Video", "id":1, "video_file":"https://drive.google.com/file/d/17dBguEG-7_gBKyGFdQ-7fWANCH6mVebi/preview", "download":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/ex1.mp4", "dl":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4","dl2":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur12.mp4","created_at": "2024-12-25T18:45:44.610474+09:00"}])
+            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/ex1.mp4", "download":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/ex1.mp4", "dl":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4","dl2":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur12.mp4","created_at": "2024-12-25T18:45:44.610474+09:00"}])
             setIsVideo(true)
             setPeopleList(peoples)
         }
