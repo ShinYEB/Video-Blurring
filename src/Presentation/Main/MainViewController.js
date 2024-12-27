@@ -237,7 +237,7 @@ function MainViewController() {
         if (token) {
             setLogin(true)
             //loadVideo()
-            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4", "download":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4", "dl":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4","created_at": "2024-12-25T18:45:44.610474+09:00"}])
+            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/ex1.mp4", "download":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/ex1.mp4", "dl":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4","dl2":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4","created_at": "2024-12-25T18:45:44.610474+09:00"}])
             setIsVideo(true)
             setPeopleList(peoples)
         }
@@ -268,7 +268,7 @@ function MainViewController() {
             <h2>Video Library</h2>
             <div className="video-grid">
                 {(isVideo) && videos.map((video) => (
-                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: {"video":video, "token":token}})}}>
+                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: {"video":video, "token":token, "peoples":peopleList}})}}>
                     <div className="video-item" style={{display:"flex"}}>
                         <video src={video.video_file} style={{width:"300px", height:"230px"}} />
                         <div style={{marginLeft:"20px"}}>

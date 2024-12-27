@@ -58,10 +58,10 @@ function VideoEditViewController() {
     const [videoFile, setVideoFile] = useState(null);
     const [isUploadModalOpen, setUploadModal] = useState(false)
     const [isDownloadModalOpen, setDownloadModal] = useState(false)
-
+    const [peopleList, setPeopleList] = useState([])
 
     const location = useLocation();
-    const { video, token } = location.state || {}; // 전달된 값 받기
+    const { video, token, peoples } = location.state || {}; // 전달된 값 받기
 
     const handleDownload = async () => {
         console.log(video.video_file)
@@ -88,14 +88,16 @@ function VideoEditViewController() {
       };
 
     useState(() => {
-        
+        if (peoples) {
+            setPeopleList(peoples)
+        }
     }, [])
 
     return <div className={ModuleStyle.contentPageStyle}>
         <header className="header">
         <h1 className="logo"></h1>
         <nav className="nav">
-           <Link to="/" className="nav-item" state={{token:token}}>main Page</Link>
+           <Link to="/" className="nav-item" state={{token:token, peoples:peopleList}}>main Page</Link>
             <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>
             <Link to="/home" className="nav-item">Log out</Link>
         </nav>
@@ -110,7 +112,7 @@ function VideoEditViewController() {
         
         <div style={{marginLeft:"180px", display:"flex"}}>
             <button className="thumbnail" onClick={() => {setDownloadModal(true)}}>
-                <video src={video.video_file} style={{width:"275px", height:"200px"}}/>
+                <video src={video.dl2} style={{width:"275px", height:"200px"}}/>
             </button>
         </div>
 
@@ -196,10 +198,10 @@ function VideoEditViewController() {
             </div>
 
             <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
-                <video src={video.video_file} controls width="400" />
+                <video src={video.dl2} controls width="400" />
             </div>
 
-            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
+            {/*<button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>*/}                
         
         </Modal>}
     
