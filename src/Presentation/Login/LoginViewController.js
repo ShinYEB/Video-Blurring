@@ -51,7 +51,6 @@ function LoginViewController() {
         <h1 className="logo"></h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
-            <a href="/mypage" className="nav-item">My Page</a>
             <a href="#video-editing" className="nav-item">Video Editing</a>
             </nav>
        </header>
@@ -64,7 +63,14 @@ function LoginViewController() {
                             <input className={ModuleStyle.inputBox} placeholder="   아이디" onChange={saveID}/><p style={{height:"0px"}}/>
                             <input type="password" style={{marginTop:"0px"}} className={ModuleStyle.inputBox} placeholder="   비밀번호" onChange={savePW}/>
                         </div>
-                        <button className="edit-button" style={{marginTop:"20px"}} onClick={() => {navigate("/", {state: dataToSend})}}>로그인</button>
+                        <button className="edit-button" style={{marginTop:"20px"}} onClick={() => {
+                            if (ID == "a2b1") {
+                                navigate("/", {state: dataToSend})
+                            }
+                            else {
+                                alert("잘못 입력했습니다")
+                            }
+                            }}>로그인</button>
                     </div>
                     <div style={{display:"flex", marginTop:"10px"}}>
                     <nav className="nav" style={{margin:"auto"}}>
