@@ -58,10 +58,10 @@ function VideoEditViewController() {
     const [videoFile, setVideoFile] = useState(null);
     const [isUploadModalOpen, setUploadModal] = useState(false)
     const [isDownloadModalOpen, setDownloadModal] = useState(false)
-
+    const [peopleList, setPeopleList] = useState([])
 
     const location = useLocation();
-    const { video, token } = location.state || {}; // 전달된 값 받기
+    const { video, token, peoples } = location.state || {}; // 전달된 값 받기
 
     const handleDownload = async () => {
         console.log(video.video_file)
@@ -88,14 +88,16 @@ function VideoEditViewController() {
       };
 
     useState(() => {
-        
+        if (peoples) {
+            setPeopleList(peoples)
+        }
     }, [])
 
     return <div className={ModuleStyle.contentPageStyle}>
         <header className="header">
         <h1 className="logo"></h1>
         <nav className="nav">
-           <Link to="/" className="nav-item" state={{token:token}}>main Page</Link>
+           <Link to="/" className="nav-item" state={{token:token, peoples:peopleList}}>main Page</Link>
             <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>
             <Link to="/home" className="nav-item">Log out</Link>
         </nav>

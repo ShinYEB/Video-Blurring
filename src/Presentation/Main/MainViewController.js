@@ -268,7 +268,7 @@ function MainViewController() {
             <h2>Video Library</h2>
             <div className="video-grid">
                 {(isVideo) && videos.map((video) => (
-                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: {"video":video, "token":token}})}}>
+                <button className="video-button" onClick={() => {dataToSend.video_title="Sample video1"; navigate("/video", {state: {"video":video, "token":token, "peoples":peopleList}})}}>
                     <div className="video-item" style={{display:"flex"}}>
                         <video src={video.video_file} style={{width:"300px", height:"230px"}} />
                         <div style={{marginLeft:"20px"}}>
