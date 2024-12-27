@@ -57,6 +57,30 @@ function MainViewController() {
         }
     }
 
+    const downloadModalstyle = {
+        overlay: {
+            position: 'fixed',
+            top: 0,
+            left: 0, 
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.75)',
+            zIndex:15
+        },
+        content: {
+            position: 'absolute',
+            width: '900px',
+            height: '720px',
+            margin: 'auto',
+            border: '1px solid #ccc',
+            background: '#fff',
+            borderRadius: '1%',
+            outline: 'none',
+            padding: '2%',
+            zIndex:20,
+        }
+    }
+
     const dataToSend = {
         video_title: "",
         video_path: "/public/video.mp4"
@@ -106,6 +130,13 @@ function MainViewController() {
 
     const [showTooltip, setShowTooltip] = useState(false);
 
+
+    const [uploadingtime, setUploadtime] = useState(false)
+    const [edittime, setEdittime] = useState(false)
+    const [canDownload, setCanDownload] = useState(false)
+
+    const [isDownloadModalOpen, setDownloadModal] = useState(false)
+
     const handleButtonClick = () => {
         fileInputRef.current.click(); // 숨겨진 파일 입력 클릭
     };
@@ -131,6 +162,34 @@ function MainViewController() {
             setIsAddImage(true)
         }
     };
+
+    const handleDownload = async () => {
+            console.log(videoFile)
+            try {
+              const response = await fetch(videoFile);
+              const blob = await response.blob();
+        
+              // Blob URL 생성
+              const blobUrl = URL.createObjectURL(blob);
+        
+              // 임시 링크 생성 후 다운로드
+              const link = document.createElement("a");
+              link.href = blobUrl;
+              link.download = "video.mp4"; // 저장될 파일 이름
+              document.body.appendChild(link);
+              link.click();
+        
+              // 링크 제거 및 Blob URL 해제
+              link.remove();
+              URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+              console.error("Download failed:", error);
+            }
+          };
+    
+        useState(() => {
+            
+        }, [])
 
 
     const loadVideo = async () => {
@@ -221,9 +280,9 @@ function MainViewController() {
             </div>
         </section>}
         
-        <section className="video-library">
+        {/*<section className="video-library">
             <h2>Try Video Edit</h2>
-        </section>
+        </section>*/}
 
         <footer className="footer">
             <div className="footer-content">
@@ -300,7 +359,7 @@ function MainViewController() {
                 {videoFile && (
                 <>
                     <div className="video-preview">
-                        <video src={videoFile} controls width="400" />
+                        <video src={videoFile} controls width="400"  style={{width:"700px", height:"450px"}}/>
                     </div>
                 </>
                 )}
@@ -352,13 +411,42 @@ function MainViewController() {
                     type="range" min={0} max={1} color="gray" step={0.02} value={parameter2} onChange={(event) => { setParameter2(event.target.valueAsNumber); }}/>
                     {parameter2}
                     */}
-                    <button className="edit-button2" onClick={() => {alert("저장되었습니다."); setVideos([...videos, { 
+
+                    {(!canDownload) && <div>
+                    {(!edittime) && <button className="edit-button2" onClick={() => 
+                    {setUploadtime(true); setTimeout(() => {setVideos([...videos, { 
                         title: name,
                         id: 1, 
                         video_file: videoFile, 
                         created_at: "2024-12-27T18:45:44.610474+09:00"
                         }]);
-                        setUploadModal(false);}}>저장</button>
+                        alert("업로드 되었습니다."); setUploadtime(false); setEdittime(true);}, 7000); ; }} 
+                        
+                        style={{height:"50px"}}>
+                            {(uploadingtime) && <div className="spinner"></div>}
+                            {(!uploadingtime) && <div style={{height:"28px"}}/>}
+                            <p style={{marginTop:"-25px"}}>업로드</p>
+                        </button>}
+
+                    {(edittime) && <button className="edit-button2" onClick={() => 
+                    {setUploadtime(true); setTimeout(() => {
+                        setCanDownload(true);}, 15000); ; }} 
+                        
+                        style={{height:"50px"}}>
+                            {(uploadingtime) && <div className="spinner"></div>}
+                            {(!uploadingtime) && <div style={{height:"28px"}}/>}
+                            <p style={{marginTop:"-25px"}}>블러링 처리</p>
+                        </button>}
+                    </div>}
+                    
+                    {(canDownload) && <button className="edit-button2" onClick={() => 
+                    {setDownloadModal(true); }} 
+                        
+                        style={{height:"50px"}}>
+                            <div style={{height:"28px"}}/>
+                            <p style={{marginTop:"-25px"}}>다운로드</p>
+                        </button>}
+
                 </div>
 
             </div>
@@ -424,6 +512,20 @@ function MainViewController() {
                         img: imageList[0]
                         }]); alert("추가했습니다!"); setAddModal(false)}}>저장</button>
             </div>
+        </Modal>}
+
+        {(isDownloadModalOpen) && <Modal style={downloadModalstyle} isOpen={isDownloadModalOpen}>
+            <div style={{display:"flex"}}>
+                <h1 style={{marginTop:"-10px"}}>Download</h1>
+                <button className={ModuleStyle.cancelButton} onClick={() => {setDownloadModal(false);}}>X</button>                
+            </div>
+
+            <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
+                <video src={videoFile} controls width="400" />
+            </div>
+
+            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
+        
         </Modal>}
     </div>        
 }

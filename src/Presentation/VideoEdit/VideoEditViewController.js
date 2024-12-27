@@ -101,12 +101,11 @@ function VideoEditViewController() {
         </nav>
        </header>
 
-       <h2 style={{marginTop:"100px", marginLeft:"180px"}}>video.video_title</h2>
+       <h2 style={{marginTop:"100px", marginLeft:"180px"}}>Video</h2>
        <div className="video-preview" style={{margin:"auto"}}>
             <video src={video.video_file} controls width="400" />
         </div>
-        <button className="cta-button" style={{marginLeft:"480px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>
-    
+        {(false) && <button className="cta-button" style={{marginLeft:"480px", marginTop:"30px"}} onClick={() => setUploadModal(true)}>  Video Edit </button>}    
         <h2 style={{marginTop:"100px", marginLeft:"190px"}}>Video Download</h2>
         
         <div style={{marginLeft:"180px", display:"flex"}}>
