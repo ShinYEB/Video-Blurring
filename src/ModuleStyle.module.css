@@ -324,8 +324,8 @@
     background-size: 45px; /* 이미지 크기 조정 */
     background-repeat: no-repeat; /* 반복 제거 */
     background-position: center; /* 이미지 위치 */
-    width: 10px;
-    height: 10px;
+    width: 120px;
+    height: 120px;
     margin-left: 40px; 
     margin-top: 30px;
     background-color: white;
