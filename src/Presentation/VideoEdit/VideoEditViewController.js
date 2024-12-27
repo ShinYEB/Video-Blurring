@@ -196,7 +196,7 @@ function VideoEditViewController() {
             </div>
 
             <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
-                <video src={video.video_file} controls width="400" />
+                <video src={video.dl} controls width="400" />
             </div>
 
             <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
