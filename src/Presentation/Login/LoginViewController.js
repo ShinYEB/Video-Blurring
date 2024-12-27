@@ -64,7 +64,7 @@ function LoginViewController() {
                             <input type="password" style={{marginTop:"0px"}} className={ModuleStyle.inputBox} placeholder="   비밀번호" onChange={savePW}/>
                         </div>
                         <button className="edit-button" style={{marginTop:"20px"}} onClick={() => {
-                            if (id == "a2b1") {
+                            if (ID == "a2b1") {
                                 navigate("/", {state: dataToSend})
                             }
                             else {
