@@ -307,7 +307,7 @@ function MainViewController() {
         {(isUploadModalOpen) && <Modal style={uploadModalstyle} isOpen={isUploadModalOpen}>
             <div style={{display:"flex"}}>
                 <h1 style={{marginTop:"-10px"}}>Video Upload</h1>
-                <button className={ModuleStyle.cancelButton} onClick={() => {setUploadModal(false); setVideoFile(false);}}>X</button>                
+                <button className={ModuleStyle.cancelButton} onClick={() => {setShowTooltip(false); setUploadModal(false); setVideoFile(false);}}>X</button>                
             </div>
             
             <div className="video-name">
@@ -421,7 +421,7 @@ function MainViewController() {
                         video_file: videoFile, 
                         created_at: "2024-12-27T18:45:44.610474+09:00"
                         }]);
-                        alert("업로드 되었습니다."); setUploadtime(false); setEdittime(true);}, 7000); ; }} 
+                        alert("업로드 되었습니다."); setUploadtime(false); setEdittime(true); setShowTooltip(false);}, 7000); ; }} 
                         
                         style={{height:"50px"}}>
                             {(uploadingtime) && <div className="spinner"></div>}
@@ -431,7 +431,7 @@ function MainViewController() {
 
                     {(edittime) && <button className="edit-button2" onClick={() => 
                     {setUploadtime(true); setTimeout(() => {
-                        setCanDownload(true);}, 20000); ; }} 
+                        setCanDownload(true); setShowTooltip(false); }, 20000); ; }} 
                         
                         style={{height:"50px"}}>
                             {(uploadingtime) && <div className="spinner"></div>}
@@ -441,7 +441,7 @@ function MainViewController() {
                     </div>}
                     
                     {(canDownload) && <button className="edit-button2" onClick={() => 
-                    {setDownloadModal(true); }} 
+                    {setDownloadModal(true);setShowTooltip(false);  }} 
                         
                         style={{height:"50px"}}>
                             <div style={{height:"28px"}}/>
