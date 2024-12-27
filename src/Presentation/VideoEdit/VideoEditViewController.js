@@ -199,7 +199,7 @@ function VideoEditViewController() {
                 <video src={video.dl2} controls width="400" />
             </div>
 
-            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
+            {/*<button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>*/}                
         
         </Modal>}
     
