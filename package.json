@@ -13,13 +13,13 @@
     "react-modal": "^3.16.1",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.14.2",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://a2b1.s3.us-east-1.amazonaws.com/"
+  "proxy": "http://127.0.0.1:8000"
 }
