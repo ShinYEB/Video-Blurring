@@ -456,8 +456,8 @@ function MainViewController() {
         <div
           style={{
             position: "absolute",
-            top: "52.5%",
-            left: "83%",
+            top: "54%",
+            left: "72.7%",
             transform: "translateX(-50%)",
             background: "#fff",
             border: "1px solid #ccc",
