@@ -51,7 +51,6 @@ function LoginViewController() {
         <h1 className="logo"></h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
-            <a href="/mypage" className="nav-item">My Page</a>
             <a href="#video-editing" className="nav-item">Video Editing</a>
             </nav>
        </header>
