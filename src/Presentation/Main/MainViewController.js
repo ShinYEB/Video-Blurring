@@ -88,7 +88,7 @@ function MainViewController() {
 
     const network = new Network()
     const location = useLocation();
-    const { token } = location.state || {}; // 전달된 값 받기
+    const { token, peoples } = location.state || {}; // 전달된 값 받기
     
     const navigate = useNavigate();
 
@@ -110,7 +110,7 @@ function MainViewController() {
     const [imageList, setImageList] = useState([])
     const [isAddImage, setIsAddImage] = useState(false)
 
-    const [peopleList, setPeopleList] = useState([{"name":"한지민", "img":`${process.env.PUBLIC_URL}/HJM.png`}])
+    const [peopleList, setPeopleList] = useState([])
 
     const [name, setName] = useState("Name");  
     const [isAddModalOpen, setAddModal] = useState(false)
@@ -163,10 +163,10 @@ function MainViewController() {
         }
     };
 
-    const handleDownload = async () => {
-            console.log(videoFile)
+    const handleDownload = async (video) => {
+        console.log(video)
             try {
-              const response = await fetch(videoFile);
+              const response = await fetch(video.dl);
               const blob = await response.blob();
         
               // Blob URL 생성
@@ -237,8 +237,9 @@ function MainViewController() {
         if (token) {
             setLogin(true)
             //loadVideo()
-            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4", "created_at": "2024-12-25T18:45:44.610474+09:00"}])
+            setVideos([{"title":"Video", "id":1, "video_file":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4", "download":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/blur1.mp4", "dl":"https://a2b1.s3.us-east-1.amazonaws.com/processed_videos/output_with_audio.mp4","created_at": "2024-12-25T18:45:44.610474+09:00"}])
             setIsVideo(true)
+            setPeopleList(peoples)
         }
     }, []);
     
@@ -247,7 +248,7 @@ function MainViewController() {
         <h1 className="logo"></h1>
         <nav className="nav">
             <a href="/" className="nav-item">Main Page</a>
-            {(isLogin) && <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>}
+            {(isLogin) && <Link to="/mypage" className="nav-item" state={{token:token, peoples:peopleList}}>My Page</Link>}
             {(!isLogin) && <Link to="/login" className="nav-item">Log In</Link>}
             {(isLogin) && <Link to="/home" className="nav-item">Log out</Link>}
             </nav>
@@ -430,7 +431,7 @@ function MainViewController() {
 
                     {(edittime) && <button className="edit-button2" onClick={() => 
                     {setUploadtime(true); setTimeout(() => {
-                        setCanDownload(true);}, 15000); ; }} 
+                        setCanDownload(true);}, 20000); ; }} 
                         
                         style={{height:"50px"}}>
                             {(uploadingtime) && <div className="spinner"></div>}
@@ -469,8 +470,8 @@ function MainViewController() {
           }}
         >
             강: 영상에서 추출한 얼굴이면 좋아요 <br/>
-            중: 조명과 안경 유무에도 유연해요<br/>
-            약: 등록사진과 영상 사진의 얼굴이 달라도 괜찮아요<br/>
+            중: 등록사진과 영상 사진의 얼굴이 달라도 괜찮아요 <br/>
+            약: 조명과 안경 유무에도 유연해요 <br/>
         </div>
       )}
 
@@ -521,10 +522,10 @@ function MainViewController() {
             </div>
 
             <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
-                <video src={videoFile} controls width="400" />
+                <video src={videos[0].download} controls width="400" />
             </div>
 
-            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={handleDownload}>download</button>                
+            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={() => {handleDownload(videos[0])}}>download</button>                
         
         </Modal>}
     </div>        

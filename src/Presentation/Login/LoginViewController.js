@@ -13,7 +13,8 @@ function LoginViewController() {
     const [PW, setPW] = useState("")
 
     const dataToSend = {
-        token: "loginToken"
+        token: "loginToken",
+        peoples: [{"name":"한지민", "img":`${process.env.PUBLIC_URL}/HJM.png`}]
     };
 
     const saveID = event => {

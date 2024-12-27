@@ -60,7 +60,7 @@ function MypageViewController() {
     const network = new Network()
     const location = useLocation();
 
-    const { token } = location.state || {}
+    const { token, peoples } = location.state || {}
     const [isModalOpen, setModal] = useState(false)
     const [isAddModalOpen, setAddModal] = useState(false)
     const [name, setName] = useState("Name");  
@@ -176,6 +176,7 @@ function MypageViewController() {
     useState(() => {
         if (token) {
             getPeopleList()
+            setPeopleList(peoples)
         }
     }, [])
 
@@ -183,7 +184,7 @@ function MypageViewController() {
         <header className="header">
         <h1 className="logo"></h1>
         <nav className="nav">
-            <Link to="/" className="nav-item" state={{token:token}}>main Page</Link>
+            <Link to="/" className="nav-item" state={{token:token, peoples:peopleList}}>main Page</Link>
             <Link to="/mypage" className="nav-item" state={{token:token}}>My Page</Link>
             <Link to="/home" className="nav-item">Log out</Link>
         </nav>
