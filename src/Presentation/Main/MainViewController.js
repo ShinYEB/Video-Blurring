@@ -522,10 +522,10 @@ function MainViewController() {
             </div>
 
             <div className="video-preview" style={{marginLeft:"90px", marginTop:"50px"}}>
-                <video src={videos[0].download} controls width="400" />
+                <video src={videos[0].dl} controls width="400" />
             </div>
 
-            <button className="edit-button" style={{marginTop:"30px", width:"250px", height:"55px", marginTop:"70px", marginLeft:"330px"}} onClick={() => {handleDownload(videos[0])}}>download</button>                
+                     
         
         </Modal>}
     </div>        
